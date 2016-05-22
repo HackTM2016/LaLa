@@ -1,0 +1,432 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+@import "fonts.scss";
+
+//font-family: 'Pacifico', cursive;
+
+$dark: #1a1a1a;
+$darky: #2e2e2e;
+$darker: #1d1d1d;
+$darkish: #414141;
+$aqua: #00defc;
+$aqua2: #1fe4ff;
+$white: #ffffff;
+
+html,body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: $dark;
+  overflow: hidden;
+}
+
+
+#player {
+  opacity: 0;
+  position: absolute;
+  z-index: 999;
+  bottom: 0;
+}
+
+.lala-side-content {
+  position: absolute;
+  padding: 15px;
+  width: 250px;
+  background-color: $aqua;
+  height: 100%;
+  top: 0;
+  right: -250px;
+  transition: right linear 500ms;
+  &.extended {
+    transition: right linear 500ms;
+    right: 120px;
+  }
+  .search {
+    height: 100%;
+    ul {
+      height: 100%;
+      overflow: auto;
+      list-style-type: none;
+      padding: 0;
+      padding-bottom: 50px;
+      li {
+        border-radius: 4px;
+        clear: left;
+        height: 80px;
+        padding: 10px 0;
+        img {
+          margin-right: 10px;
+          float: left;
+          width: 80px;
+        }
+        p {
+          margin-bottom: 0;
+          color: $darky;
+          font-size: 12px;
+          &.details {
+            color: $white;
+            font-weight: 300;
+          }
+        }
+        &:hover {
+          background-color: $aqua2;
+        }
+      }
+    }
+  }
+}
+
+.lala-sideBar {
+  z-index: 999;
+  width: 120px;
+  height: 100%;
+  background-color: $dark;
+  border-left: 2px solid $aqua;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  a {
+    font-size: 11px;
+    color: $aqua;
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+    }
+  }
+  ul {
+    padding: 0 12px;
+    li {
+      cursor: pointer;
+      margin-top: 5px;
+      padding-top: 20px;
+      list-style-type: none;
+      text-align: right;
+      border-top: 1px solid $darky;
+      &:hover {
+        div.icon {
+          color: $aqua;
+        }
+      }
+      div.icon {
+        text-align: center;
+        font-size: 44px;
+        color: $darkish;
+      }
+      &.active {
+        div.icon {
+          color: $white;
+        }
+      }
+
+      &:first-of-type {
+        padding-top: 10px;
+        border: none;
+      }
+    }
+  }
+
+}
+
+
+  .lala-playlist-container {
+    background-color: $dark;
+    display: block;
+    height: 65%;
+
+    h2 {
+      width: 65%;
+
+      margin: 0 auto;
+      color: $aqua;
+      span {
+        font-family: 'Pacifico', cursive;
+      }
+    }
+
+    .lala-playlist {
+
+      height: 100%;
+    padding-top: 40px;
+    ul {
+      height: 80%;
+      overflow: auto;
+
+
+      margin: 30px auto 0 auto;
+      padding: 0;
+      list-style-type: none;
+      width: 65%;
+      li {
+        width: 100%;
+        clear: both;
+        padding: 25px 20px;
+        .position {
+          color: $darkish;
+          padding: 12px;
+          text-align: center;
+          display: inline-block;
+          float: left;
+          margin-right: 25px;
+        }
+        .lala-song-info {
+          display: inline-block;
+          p {
+            font-size: 16px;
+            font-weight: 300;
+            color: $aqua;
+            margin-bottom: 0;
+            &.votes {
+              color: $darkish;
+              font-size: 12px;
+            }
+          }
+        }
+        .duration {
+          padding: 10px;
+          display: inline-block;
+          float: right;
+          color: $darkish;
+        }
+        &:first-of-type {
+          background-color: $darker;
+          border-radius: 4px;
+          .position {
+            color: $white;
+          }
+          .lala-song-info {
+            p {
+              font-weight: 600;
+              &.votes {
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+.lala-wrapper {
+  height: 100%;
+}
+
+
+.lala-player-container {
+  display: block;
+  top: 0;
+  height: 35%;
+
+
+  .lala-player-bg {
+
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    opacity: 0.6;
+    top:0;
+    left:0;
+    background-repeat: repeat-y;
+    background-position: 0 65%;
+    background-size: 100%;
+    display: block;
+    width: 100%;
+    height: 45%;
+    position: absolute;
+    z-index: -1;
+    &.default {
+
+      //background-size:  auto 100%;
+      background-position: 75% center;
+      filter: none;
+      opacity: 1;
+      background-image: url("../images/defaultbg.png") !important;
+    }
+  }
+
+  .lala-player-info {
+    width: 100%;
+    height: 35%;
+    display: block;
+    padding: 30px;
+    color: white;
+    z-index: 2;
+    p {
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .lala-title {
+      height: 100px;
+      padding-top: 15px;
+      .logo {
+        display: block;
+        margin: 0 auto;
+        //margin: 12px auto 0 auto;
+      }
+      p.song-name {
+        margin: 0 auto;
+        padding-top: 30px;
+        font-size: 23px;
+      }
+    }
+
+    .lala-player {
+      width: 60%;
+      margin: 0 auto;
+      .icon {
+        position: absolute;
+        display: inline-block;
+        margin-left: -40px;
+        font-size: 30px;
+        margin-top: -15px;
+        &:hover {
+          color: $aqua;
+        }
+      }
+      .song-bar {
+        display: block;
+        background-color: rgba(255,255,255,0.5);
+        height: 4px;
+        border-radius: 2px;
+        width: 100%;
+        .current-time-bar {
+          width: 0;
+          height: 4px;
+          border-radius: 2px;
+          background-color: $aqua;
+        }
+
+      }
+    }
+
+    .lala-times {
+      color: $aqua;
+      width: 60%;
+      margin: 0 auto;
+      padding-top: 10px;
+      .current-time {
+        display: inline-block;
+
+      }
+      .song-time {
+        display: inline-block;
+        float: right;
+      }
+    }
+
+  }
+
+  .lala-thumb {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 120px;
+    margin-top: 35px;
+    width: 120px;
+    height: 90px;
+    background-color: $aqua;
+    border-radius: 4px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
+    transition: right linear 500ms;
+    &.minimized {
+      transition: right linear 500ms;
+      right: 370px;
+    }
+  }
+}
+
+.lala-diago {
+  left: 0;
+  z-index: -1;
+  //top: 25%;
+  margin-top: -80px;
+  position: absolute;
+  background-image: url("../images/diago.png");
+  width: 100%;
+  height: 88px;
+}
+
+
+.lala-container {
+  height: 100%;
+  padding: 0;
+  padding-right: 120px;
+}
+
+.lala-part {
+  transition: padding-right linear 500ms;
+  &.minimized {
+    transition: padding-right linear 500ms;
+    padding-right: 250px;
+  }
+}
+
+.lalaScroll::-webkit-scrollbar-track {
+  //-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: $dark;
+}
+
+.lalaScroll::-webkit-scrollbar {
+  width: 4px;
+  background-color: $dark;
+}
+
+.lalaScroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  //-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: $dark;
+}
+
+.lala-input-group {
+  input {
+    border: none;
+  }
+  button {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-color: white;
+    border-left: 1px solid $aqua;
+  }
+}
+
+.settings {
+  input {
+    margin-bottom: 10px;
+    border: none;
+  }
+}
+
+.playlists {
+ ul {
+   list-style-type: none;
+   padding: 0;
+   padding-top: 40px;
+   li {
+     margin-bottom: 10px;
+     border-radius: 4px;
+     background-color: $aqua2;
+     padding: 10px 15px;
+     color: $darkish;
+     cursor: pointer;
+     &:hover {
+       color: $white;
+     }
+   }
+ }
+}
+
+.angular-google-map-container {
+  height: 200px;
+}

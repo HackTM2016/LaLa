@@ -1,0 +1,138 @@
+<div id="player"></div>
+
+<div class="container-fluid lala-container">
+  <div class="lala-player-container lala-part" ng-class="{'minimized': sideExtended}">
+
+    <div class="lala-player-bg" ng-style="{'background-image': 'url(' + currentSong.snippet.thumbnails.high.url + ')'}" ng-class="{'default': !currentSong.snippet}">
+
+    </div>
+    <div class="lala-player-info">
+      <p>Now playing at {{account.name}}</p>
+
+      <div class="lala-title">
+        <img class="logo" src="../images/logo.png" ng-show="!currentSong">
+        <p class="song-name" ng-show="currentSong"> {{currentSong.snippet.title}}</p>
+      </div>
+
+
+      <div class="lala-player">
+        <div class="icon icon-music-play-button" ng-click="playVideo()" ng-show="!currentSong"></div>
+        <div class="icon icon-music-stop-button" ng-click="stopVideo()" ng-show="currentSong"></div>
+        <div class="song-bar">
+          <div class="current-time-bar" ng-style="{'width': currentProgress}"></div>
+        </div>
+      </div>
+
+      <div class="lala-times">
+        <span class="current-time">{{currentTime | secondsToDate | date:'mm:ss'}}</span>
+        <span class="song-time">
+                {{durationTime | secondsToDate | date:'mm:ss'}}
+        </span>
+      </div>
+
+      <div class="lala-thumb" ng-class="{'minimized': sideExtended}" ng-style="{'background-image': 'url(' + currentSong.snippet.thumbnails.default.url + ')'}" ng-show="currentSong">
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lala-playlist-container lala-part" ng-class="{'minimized': sideExtended}">
+
+    <div class="lala-diago">  </div>
+
+    <div class="lala-playlist">
+      <h2>{{currentPlaylist.name}} <span>playlist</span></h2>
+      <ul class="lalaScroll">
+        <li ng-repeat="song in currentPlaylist.items" ng-if="currentSong.id != song.id">
+          <div class="position">
+            {{currentSong ? $index : $index + 1}}
+          </div>
+          <div class="lala-song-info">
+            <p>{{song.snippet.title}}</p>
+            <p class="votes">{{song.votes}} votes</p>
+          </div>
+          <div class="duration">
+            {{song.contentDetails.duration | youtubeDate}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<div class="lala-side-content" ng-class="{'extended': sideExtended}">
+  <div class="search" ng-show="activeTab == 'search'">
+    <form ng-submit="search()">
+      <div class="input-group lala-input-group">
+      <input type="text" class="form-control" placeholder="Search..." ng-model="searchText.value">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit"> <span class="glyphicon glyphicon-search"></span> </button>
+        </span>
+      </div>
+    </form>
+
+    <ul>
+      <li ng-repeat="song in searchResults" ng-click="pushToList(song.id.videoId)">
+      <img ng-src="{{song.snippet.thumbnails.default.url}}">
+        <p>{{song.snippet.title | limitTo: 25}}</p>
+        <p class="details">{{song.snippet.channelTitle}}</p>
+      </li>
+    </ul>
+
+
+  </div>
+
+  <div class="playlists" ng-show="activeTab == 'playlists'">
+    <form ng-submit="addNewPlaylist()">
+      <div class="input-group lala-input-group">
+        <input type="text" class="form-control" placeholder="Your playlist name" ng-model="newPlaylist.name">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit"> <span class="glyphicon glyphicon-plus"></span> </button>
+        </span>
+      </div>
+    </form>
+
+    <ul>
+      <li ng-repeat="p in playlists" ng-click="selectPlaylist(p)"> {{p.name}}</li>
+    </ul>
+  </div>
+
+  <div class="settings" ng-show="activeTab == 'settings'">
+      <input type="text" class="form-control" ng-model="account.name">
+      <input type="password" class="form-control" value="testpassword">
+
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true">
+
+      <ui-gmap-marker idkey="map.markerKey" coords="map.markerCoords" options="map.markerOptions">
+      </ui-gmap-marker>
+
+
+    </ui-gmap-google-map>
+
+
+  </div>
+</div>
+
+
+<div class="lala-sideBar">
+  <ul>
+    <li ng-click="selectTab('now')" ng-class="{'active': activeTab == 'now'}">
+      <div class="icon icon-music-note-multiple"></div>
+      <a href="#">Now Playing</a>
+    </li>
+    <li ng-click="selectTab('search')" ng-class="{'active': activeTab == 'search'}">
+      <div class="icon icon-music-record"></div>
+      <a href="#">Search</a>
+    </li>
+    <li ng-click="selectTab('playlists')" ng-class="{'active': activeTab == 'playlists'}">
+      <div class="icon icon-music-playlist"></div>
+      <a href="#">Playlists</a>
+    </li>
+    <li ng-click="selectTab('settings')" ng-class="{'active': activeTab == 'settings'}">
+      <div class="icon icon-music-mixer"></div>
+      <a href="#">Settings</a>
+    </li>
+    <li ng-click="testSeek()">O</li>
+  </ul>
+</div>
+</div>

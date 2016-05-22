@@ -1,0 +1,11 @@
+<ion-view view-title="LOCATIONS">
+  <ion-content class="my-content">
+    <ion-list>
+      <ion-item class="my-item" ng-repeat="location in locations" ng-click="selectLocation(location)">
+        <img ng-src="{{location.logo}}">
+        <span>{{location.name}}</span>
+        <!--<p class="distance">{{location.distance}} meters</p>-->
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

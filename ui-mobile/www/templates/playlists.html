@@ -1,0 +1,63 @@
+<ion-view view-title="Playlist">
+  <ion-content class="my-content" scroll="false">
+
+
+    <ion-row class="my-top-playing">
+      <div class="my-player-bg" ng-style="{'background-image': 'url(' + currentSong.snippet.thumbnails.high.url + ')'}">
+
+      </div>
+      <div class="my-player-info">
+        <p>Now playing at {{selectedLocation.name}}</p>
+        <p class="song-name">{{currentSong.snippet.title}}</p>
+
+       <div class="song-bar">
+         <div class="current-time-bar" ng-style="{'width': currentProgress}"></div>
+
+       </div>
+        <div style="width: 90%; margin: 0 auto;">
+          <span class="current-time">{{currentTime | secondsToDate | date:'mm:ss'}}</span>
+        <span class="song-time">
+                          {{durationTime}}
+
+        </span>
+        </div>
+
+      </div>
+<!--<img ng-src="{{currentSong.snippet.thumbnails.high.url}}">-->
+      </ion-row>
+    <ion-row class="my-btm-playing">
+      <ion-slides options="options" slider="data.slider">
+        <!--<ion-slide-page>-->
+          <!--<ion-content>-->
+            <!--<ion-list class="my-playlist">-->
+              <!--<ion-item class="my-item" ng-repeat="song in songs">-->
+                <!--<span class="position">{{$index + 1}}</span>{{song.snippet.title}}-->
+                <!--<p>3 votes </p>-->
+              <!--</ion-item>-->
+            <!--</ion-list>-->
+          <!--</ion-content>-->
+        <!--</ion-slide-page>-->
+        <!--<ion-slide-page>-->
+         <ion-content>
+          <ion-list class="my-playlist">
+            <ion-item class="my-item" ng-class="{'voted': song.voted, 'selected': messageId == song.id}" ng-repeat="song in songs" on-double-tap="voteSong(song)" on-tap="tapSong(song.id)" ng-if="currentSong.id != song.id">
+                <span class="position">{{$index + 1}}</span>{{song.snippet.title}}
+                <p>{{song.votes}} votes </span><span class="vote-message" ng-class="{'active': messageId == song.id, 'positive': song.voted}">
+                  <span class="ion-thumbsup" ng-if="song.voted"></span>
+                  <span class="ion-log-in" ng-if="!song.voted"></span>
+                  {{song.voted ? "Voted" : "Double tap to vote"}}
+                </span></p>
+            </ion-item>
+          </ion-list>
+         </ion-content>
+        </ion-slide-page>
+      </ion-slides>
+
+    </ion-row>
+
+
+
+
+
+  </ion-content>
+</ion-view>
